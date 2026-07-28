@@ -52,9 +52,11 @@ function TopAppBar({
     >
       {/* Logo + Name */}
       <div className="flex items-center gap-2.5 select-none">
-        <div className="flex items-center justify-center h-9 w-9 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-sm text-white">
-          <Trees className="h-5 w-5" />
-        </div>
+        <img
+          src="/app-icon.png"
+          alt="My Family Icon"
+          className="h-9 w-9 rounded-xl object-cover shadow-sm"
+        />
         <div className="leading-none">
           <span className="text-base font-extrabold tracking-tight text-foreground">My Family</span>
           <span className="block text-[10px] text-muted-foreground font-medium">Family Tree Builder</span>
