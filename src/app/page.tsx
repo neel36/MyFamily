@@ -149,6 +149,7 @@ function WelcomeCard({ familyCount }: { familyCount: number }) {
             <span className="text-xs font-semibold text-white">100% Offline & Private</span>
           </div>
         </div>
+      </div>
       </motion.div>
     </div>
   );
