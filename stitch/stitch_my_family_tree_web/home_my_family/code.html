@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Family - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-mesh {
+            background-color: #f8f9fa;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(177, 240, 206, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(143, 243, 246, 0.15) 0px, transparent 50%);
+        }
+        .organic-curve {
+            border-radius: 60% 40% 70% 30% / 30% 60% 40% 70%;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#e7e8e9",
+                      "surface": "#f8f9fa",
+                      "on-tertiary-fixed": "#2c1700",
+                      "inverse-surface": "#2e3132",
+                      "background": "#f8f9fa",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#95d4b3",
+                      "inverse-primary": "#95d4b3",
+                      "on-secondary-fixed": "#002021",
+                      "on-tertiary-container": "#ffd1a5",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#683d00",
+                      "primary-fixed": "#b1f0ce",
+                      "surface-container-low": "#f3f4f5",
+                      "primary-container": "#2d6a4f",
+                      "on-secondary-container": "#007073",
+                      "on-primary-fixed-variant": "#0e5138",
+                      "surface-container": "#edeeef",
+                      "outline": "#707973",
+                      "secondary-container": "#8ff3f6",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#404943",
+                      "surface-dim": "#d9dadb",
+                      "surface-bright": "#f8f9fa",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb86b",
+                      "secondary-fixed-dim": "#72d6da",
+                      "tertiary-fixed": "#ffdcbc",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-error-container": "#93000a",
+                      "primary": "#0f5238",
+                      "on-surface": "#191c1d",
+                      "secondary-fixed": "#8ff3f6",
+                      "inverse-on-surface": "#f0f1f2",
+                      "tertiary-container": "#8a5200",
+                      "surface-variant": "#e1e3e4",
+                      "outline-variant": "#bfc9c1",
+                      "on-background": "#191c1d",
+                      "surface-tint": "#2c694e",
+                      "secondary": "#00696c",
+                      "on-primary-container": "#a8e7c5",
+                      "on-primary-fixed": "#002114",
+                      "on-secondary-fixed-variant": "#004f52",
+                      "tertiary": "#693d00",
+                      "on-primary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "4px",
+                      "sm": "12px",
+                      "gutter": "16px",
+                      "xl": "40px",
+                      "container-max": "1200px",
+                      "lg": "24px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "title-md": ["Plus Jakarta Sans"],
+                      "headline-lg-mobile": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-sm": ["Plus Jakarta Sans"],
+                      "label-caps": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background flex justify-between items-center px-gutter py-md w-full sticky top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="park">park</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim tracking-tight">My Family</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<main class="flex-grow bg-mesh overflow-hidden pb-32">
+<!-- Hero Section -->
+<section class="px-gutter pt-lg flex flex-col items-center text-center max-w-container-max mx-auto">
+<div class="relative w-full max-w-md aspect-square mb-lg flex items-center justify-center">
+<!-- Decorative Organic Background Shapes -->
+<div class="absolute inset-0 bg-primary-fixed/20 organic-curve animate-float blur-2xl" style="animation-delay: -1s;"></div>
+<div class="absolute inset-4 bg-secondary-fixed/20 organic-curve animate-float blur-xl" style="animation-delay: -3s;"></div>
+<!-- Main Illustration Placeholder -->
+<div class="relative z-10 w-4/5 h-4/5 rounded-full overflow-hidden shadow-xl ring-8 ring-surface/50">
+<img class="w-full h-full object-cover" data-alt="A warm and vibrant digital illustration of a multi-generational family—children, parents, and grandparents—gathering joyfully around a large, metaphorical green tree with swirling organic branches. The art style is modern minimalism with soft tactile textures and a sunny, high-key lighting palette dominated by lush greens, soft teals, and earthy terracotta. The mood is nurturing, nostalgic, and deeply personal, reflecting a heritage and growth theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXDw-G3iWSJjPSMj-DT1g_Ii3IalXWC5RpLlfcxWz9l2wZL6YATJwgS8gnpqx00aGrLb1TKkCqwi35kW08XhCWy4QjlIe5UIQnrJioNz5dJIbg3FlK98SE0eYvywvliFzSLZ75iKq3DslpDfxV8acHzvxHMOozLyg57NUffyJSVwONsGAzlL2GtXbFBM9ac49PzfWpCaQFMQwc7V_boogCT8VKblKf5oKMJOCuxHLYPzts6MR9oOIz8hfQkzJrCbbdzxX7MK8Zwg"/>
+</div>
+</div>
+<div class="space-y-sm px-2">
+<h2 class="font-display-lg text-display-lg text-on-surface">Roots that reach deep, branches that grow high.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm mx-auto">
+                    Build your legacy without login. <span class="font-bold text-primary">Private and secure</span> by design.
+                </p>
+</div>
+<!-- Primary Actions -->
+<div class="mt-xl w-full max-w-xs space-y-md">
+<button class="w-full bg-primary text-on-primary py-4 px-lg rounded-full font-title-md text-title-md flex items-center justify-center gap-sm shadow-lg hover:shadow-primary/20 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                    Start New Tree
+                </button>
+<button class="w-full bg-surface-container-low text-primary border-2 border-primary-fixed py-4 px-lg rounded-full font-title-md text-title-md flex items-center justify-center gap-sm hover:bg-surface-container-high active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+                    Import Tree
+                </button>
+</div>
+</section>
+<!-- Feature Bento Grid (Brief context) -->
+<section class="px-gutter mt-xl max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-surface-variant/30 flex items-start gap-md">
+<div class="p-base bg-secondary-container rounded-lg text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Offline-First</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your data never leaves your device. No cloud required, just total privacy.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm border border-surface-variant/30 flex items-start gap-md">
+<div class="p-base bg-tertiary-fixed-dim text-on-tertiary-fixed rounded-lg shrink-0">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Export Anytime</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Standard GEDCOM support ensures your family history is portable forever.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl">
+<!-- Tree (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container rounded-full px-4 py-1.5 scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-label-caps text-label-caps">Tree</span>
+</a>
+<!-- Search (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-caps text-label-caps">Search</span>
+</a>
+<!-- Media (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-label-caps text-label-caps">Media</span>
+</a>
+<!-- Settings (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for organic shapes responsiveness
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.organic-curve');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const moveX = (x - 0.5) * (20 + index * 10);
+                const moveY = (y - 0.5) * (20 + index * 10);
+                shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body></html>

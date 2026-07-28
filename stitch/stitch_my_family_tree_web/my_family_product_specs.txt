@@ -1,0 +1,28 @@
+# Product Requirements Document: My Family Tree App
+
+## App Overview
+**Name:** My Family
+**Goal:** A lightweight, easy-to-use family tree builder that works in browsers as a webapp. No login required.
+
+## Key Features
+1. **No-Login Interface:** Immediate access to the family tree builder.
+2. **Easy Tree Creation:** Visual drag-and-drop or simple form-based node addition.
+3. **Local Database:** Data is stored locally in the browser (IndexedDB/LocalStorage).
+4. **Export/Import:** 
+   - Export to JSON/CSV for mobile storage.
+   - Sync/Backup to Google Drive.
+   - Import feature to restore or update the tree.
+5. **Bottom Navigation:** Quick access to Tree, Search, Media/Gallery, and Settings.
+6. **Admin Panel:** A separate interface for managing app content, global settings, or viewing anonymized stats.
+
+## Design Principles
+- **Clean & Attractive:** Minimalist but colorful.
+- **Fast:** Optimized for mobile browser performance.
+- **Universal Design:** Usable by all age groups.
+
+## Proposed Screens
+1. **Home/Splash:** Welcome screen with options to "Start New Tree" or "Import".
+2. **Main Tree View:** The interactive family tree canvas.
+3. **Member Detail/Add:** A clean form to add/edit family member details (Photo, Name, Relation, Bio).
+4. **Settings & Data:** Export/Import controls, Google Drive sync, and app preferences.
+5. **Admin Dashboard:** Separate panel for content management.

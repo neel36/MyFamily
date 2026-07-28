@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Family - Heritage Tree</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error": "#ba1a1a",
+                "surface-container-high": "#e7e8e9",
+                "surface": "#f8f9fa",
+                "on-tertiary-fixed": "#2c1700",
+                "inverse-surface": "#2e3132",
+                "background": "#f8f9fa",
+                "error-container": "#ffdad6",
+                "primary-fixed-dim": "#95d4b3",
+                "inverse-primary": "#95d4b3",
+                "on-secondary-fixed": "#002021",
+                "on-tertiary-container": "#ffd1a5",
+                "on-error": "#ffffff",
+                "on-tertiary-fixed-variant": "#683d00",
+                "primary-fixed": "#b1f0ce",
+                "surface-container-low": "#f3f4f5",
+                "primary-container": "#2d6a4f",
+                "on-secondary-container": "#007073",
+                "on-primary-fixed-variant": "#0e5138",
+                "surface-container": "#edeeef",
+                "outline": "#707973",
+                "secondary-container": "#8ff3f6",
+                "on-tertiary": "#ffffff",
+                "on-surface-variant": "#404943",
+                "surface-dim": "#d9dadb",
+                "surface-bright": "#f8f9fa",
+                "on-secondary": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed-dim": "#ffb86b",
+                "secondary-fixed-dim": "#72d6da",
+                "tertiary-fixed": "#ffdcbc",
+                "surface-container-highest": "#e1e3e4",
+                "on-error-container": "#93000a",
+                "primary": "#0f5238",
+                "on-surface": "#191c1d",
+                "secondary-fixed": "#8ff3f6",
+                "inverse-on-surface": "#f0f1f2",
+                "tertiary-container": "#8a5200",
+                "surface-variant": "#e1e3e4",
+                "outline-variant": "#bfc9c1",
+                "on-background": "#191c1d",
+                "surface-tint": "#2c694e",
+                "secondary": "#00696c",
+                "on-primary-container": "#a8e7c5",
+                "on-primary-fixed": "#002114",
+                "on-secondary-fixed-variant": "#004f52",
+                "tertiary": "#693d00",
+                "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "md": "16px",
+                "xs": "4px",
+                "sm": "12px",
+                "gutter": "16px",
+                "xl": "40px",
+                "container-max": "1200px",
+                "lg": "24px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "body-lg": ["Plus Jakarta Sans"],
+                "title-md": ["Plus Jakarta Sans"],
+                "headline-lg-mobile": ["Plus Jakarta Sans"],
+                "display-lg": ["Plus Jakarta Sans"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "body-sm": ["Plus Jakarta Sans"],
+                "label-caps": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .tree-canvas {
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .tree-canvas:active {
+            cursor: grabbing;
+        }
+
+        .tree-connector {
+            stroke: #bfc9c1;
+            stroke-width: 2;
+            fill: none;
+            transition: all 0.3s ease;
+        }
+
+        .node-card {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .node-card:hover {
+            transform: scale(1.05) translateY(-4px);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-gutter py-md w-full sticky top-0 z-50 bg-background dark:bg-background">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="park">park</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim tracking-tight">My Family</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional high-quality studio portrait of a friendly man in his late 30s with short brown hair and a warm smile, wearing a casual linen shirt. The background is a soft, blurred neutral studio setting with warm, high-key lighting to match a clean and nurturing modern UI design. Minimalist and professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjMOYc70RHmAVLj_dPdqbxj4cU45kwXnTD0SSuvSeijAQRhX0def3g5EaRgxlqeXkcyWkbvvf-gKRFK9_GTy3_VuZT6qotT_n8PYSY0p1uiIj1RbpxlaC9caEvSgyktRhNw7FBgR7V0f1B7Kj2joW0eQ5QhaQnD8_0SeDH0KhDbuQxiPxG9ePcQHcSROQH5ONHWp7W7cYgXo8sMVzu_eqPLKYyHRmYrSahKrr_LiMlrKVH2ED6io8E2XktrHKMiWNDhuNkoVMs2Q"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative flex-1 overflow-hidden bg-background">
+<!-- Tree Grid Pattern Background -->
+<div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#2d6a4f 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+<!-- Interactive Tree Area -->
+<div class="tree-canvas absolute inset-0 w-full h-full flex items-center justify-center p-xl" id="canvas">
+<!-- SVG Connectors Layer -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="min-width: 1200px; min-height: 800px;">
+<!-- Beziers for organic feel -->
+<path class="tree-connector" d="M600,150 C600,200 450,200 450,250"></path>
+<path class="tree-connector" d="M600,150 C600,200 750,200 750,250"></path>
+<path class="tree-connector" d="M450,350 C450,400 350,400 350,450"></path>
+<path class="tree-connector" d="M450,350 C450,400 550,400 550,450"></path>
+</svg>
+<!-- Node Layer (Absolute positioned items relative to a container) -->
+<div class="relative w-[1200px] h-[800px]">
+<!-- Grandpa John (Root) -->
+<div class="absolute left-[540px] top-[70px] w-32 node-card cursor-pointer group">
+<div class="bg-surface rounded-xl p-3 shadow-md border border-[#95d4b3] flex flex-col items-center">
+<div class="w-16 h-16 rounded-full border-4 border-surface overflow-hidden shadow-sm mb-2">
+<img class="w-full h-full object-cover" data-alt="A distinguished elderly man with grey hair and a gentle, welcoming expression. He is wearing a classic wool sweater. The lighting is soft and natural, suggesting a warm afternoon in a bright living room. The aesthetic is clean, empathetic, and organic, consistent with a modern genealogy application's nurturing brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGkPS87q3XYok7_oSChmINGGYsXz66W5O_kbamwsUetbSRv14_cVj9ovlxt6u60i_Oq9PJf1bRW45JI7TUn6EH7oPUZ61x6zgPk24xReuL0YI0NUI_HW06a2VUmpnMZsphWM_sVJWcGoLmTF9pASL9EmNieccOAhzt84yIpj-WcpwM0pZnrbWsxk2k9J9z6smPBeNgDTDBb3kvfaKuNfmVH1K-gbN0K0Z7Eg52EY9WIIxd0lxFXkTcx_pFonjtX9TyBbOEQJD7xQ"/>
+</div>
+<p class="font-title-md text-title-md text-on-surface text-center leading-tight">Grandpa John</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">1945 - Present</p>
+</div>
+</div>
+<!-- Dad Michael -->
+<div class="absolute left-[390px] top-[250px] w-32 node-card cursor-pointer group">
+<div class="bg-surface rounded-xl p-3 shadow-md border border-[#00696c] flex flex-col items-center">
+<div class="w-16 h-16 rounded-full border-4 border-surface overflow-hidden shadow-sm mb-2">
+<img class="w-full h-full object-cover" data-alt="A warm, smiling middle-aged man in his 40s with kind eyes and short dark hair. He wears a casual polo shirt. The scene is bright and optimistic with soft lighting, reflecting a sense of growth and connection. The style is modern, minimalist digital photography for a high-end UI layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLLL0GuhVjlHqyfZ8fR7PR-onmTrhbgpyf4WexEsdKi6qJShmBaLLb1bPsxV7bHJzQERsb_P4Am1S_nTcseEwxBPonl2FGyabe2E5B5UKI2dqwRHHIo4AnJduR3x9WGXk6QQkaZSitu9VmuuMJ1A4BorN5gfd-VUEABeSjifh4i1oHRhwSCDx0Y7y8ZVnLgKaTkCGDNDe62vD7QCbkB7X8JubaGhXAnQSmKE-ZV60CONfwuKGIoMqJMBZXRSXJTJuvb2dTMaqvgQ"/>
+</div>
+<p class="font-title-md text-title-md text-on-surface text-center leading-tight">Dad Michael</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">1972 - Present</p>
+</div>
+</div>
+<!-- Aunt Sarah -->
+<div class="absolute left-[690px] top-[250px] w-32 node-card cursor-pointer group">
+<div class="bg-surface rounded-xl p-3 shadow-md border border-[#ffb86b] flex flex-col items-center">
+<div class="w-16 h-16 rounded-full border-4 border-surface overflow-hidden shadow-sm mb-2">
+<img class="w-full h-full object-cover" data-alt="A friendly woman in her early 40s with blonde hair and a confident, kind smile. She is pictured in a bright, airy setting with soft daylight and vibrant green foliage in the distant background. The portrait style is professional and inviting, designed for a modern user interface centered on family heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZXoWB3Tf4JjbuRdjLT1mVHe_MX0jLGpO_J9xBYICYE-7IpeA-nZqDSgmSg5Tsbzy4cWjwu_MPfVuICQh3gaLJ4dhgUq4KT08vcGSbE4trLbEvsXRaAehgkRChQLX6gytghe4ZWNbSxRle4ixwX4Je1ZWiju900hN9Ip6whC4MRgka66Z0lMZG6qhHLEd6WBvNnnDQBeIGna_COWOv5FFw85cX_-pS6suk-242v23p-Tvq8JYzlhiC0q79sPpMVYKgTQoRHCtdiQ"/>
+</div>
+<p class="font-title-md text-title-md text-on-surface text-center leading-tight">Aunt Sarah</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">1975 - Present</p>
+</div>
+</div>
+<!-- Me (User) -->
+<div class="absolute left-[290px] top-[450px] w-32 node-card cursor-pointer group">
+<div class="bg-primary-container rounded-xl p-3 shadow-lg border-2 border-primary flex flex-col items-center scale-110">
+<div class="w-16 h-16 rounded-full border-4 border-primary-container overflow-hidden shadow-sm mb-2">
+<img class="w-full h-full object-cover" data-alt="A high-quality studio portrait of a vibrant young man in his late 20s, looking directly at the camera with a friendly and optimistic expression. He has short styled hair. The background is a clean, neutral white. The lighting is soft and flattering, creating a premium feel for a personal profile in a digital family scrapbook." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsmh9tiVoI_GHRkTbmAxELvgxA0LbYDkrMpNnwtVQnSN5HKwuGnHe1rO2SQ2ZmRo2olC1cdzax6ts5xYpRzeDZ-sEH0W-JYP_aPIOiSduhXgcKGL1MjTtX5xWzOiC2hxtvVGb0wnn3RzSa2bBbd41BabejMys_otU04PNJLBX--Z1f9FLVwoaN_bcIXTNV0F_F8BAIXUH-2yt_Tg62hWst67vAjM6eHvCMo9wAcsztMy_CfndB9RSzDV7u7hEv4W68eGFHFuxbEw"/>
+</div>
+<p class="font-title-md text-title-md text-on-primary-container text-center leading-tight">Alex (Me)</p>
+<p class="font-body-sm text-body-sm text-on-primary-container opacity-80">1998 - Present</p>
+</div>
+</div>
+<!-- Sister Maya -->
+<div class="absolute left-[490px] top-[450px] w-32 node-card cursor-pointer group">
+<div class="bg-surface rounded-xl p-3 shadow-md border border-[#00696c] flex flex-col items-center">
+<div class="w-16 h-16 rounded-full border-4 border-surface overflow-hidden shadow-sm mb-2">
+<img class="w-full h-full object-cover" data-alt="A young woman in her early 20s with a cheerful, joyful expression and long brown hair. She is captured in a soft, bright environment with warm lighting. The image style is clean, modern, and high-resolution, suitable for a sophisticated social or family tree application focusing on connection and heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJgjzBOsFSRJwXQKzqjezrMs2G-5GYSmXFl3UlJg87qz8k27TGX5n7HCmx09CbMZvzxFDEcxeB-yX_biNdQc_GmyISvMjgDcQK2zQj4WTnTMJ3Xmg9mI-LuQmsxiK0Dy5Q8iQWA2714OQe74-ep8Er3gRgcTQ2VNaOoJn2S0lkQUly2VIMf3dpReyMa92x4ObyS2lsSBXVx5OLGgrOGe-Tx6eYW2i5LjBDJVMD8vUXq6mSBJd4w49vPp14aTRVKXsAFA1kML0-Mw"/>
+</div>
+<p class="font-title-md text-title-md text-on-surface text-center leading-tight">Maya</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">2001 - Present</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tree Zoom/Navigation Controls -->
+<div class="absolute bottom-6 left-6 flex flex-col gap-2 z-40">
+<button class="glass-panel w-12 h-12 rounded-full flex items-center justify-center text-primary shadow-md hover:bg-surface transition-all active:scale-90">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="glass-panel w-12 h-12 rounded-full flex items-center justify-center text-primary shadow-md hover:bg-surface transition-all active:scale-90">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="glass-panel w-12 h-12 rounded-full flex items-center justify-center text-primary shadow-md hover:bg-surface transition-all active:scale-90">
+<span class="material-symbols-outlined">center_focus_strong</span>
+</button>
+</div>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 z-50 bg-primary text-on-primary flex items-center gap-3 px-6 py-4 rounded-full shadow-xl hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-title-md text-title-md">Add Member</span>
+</button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-inverse-surface rounded-t-xl shadow-[0_-4px_8px_rgba(0,0,0,0.05)]">
+<!-- Tree (Active) -->
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container rounded-full px-4 py-1.5 active:scale-90 duration-200 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="account_tree" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-label-caps text-label-caps">Tree</span>
+</div>
+<!-- Search -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-caps text-label-caps">Search</span>
+</div>
+<!-- Media -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-label-caps text-label-caps">Media</span>
+</div>
+<!-- Settings -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</div>
+</nav>
+<script>
+        // Simple Canvas Interaction Logic
+        const canvas = document.getElementById('canvas');
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            canvas.classList.add('grabbing');
+            startX = e.pageX - canvas.offsetLeft;
+            startY = e.pageY - canvas.offsetTop;
+            // Simplified positioning logic for demo
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Basic Pan Micro-interaction
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            // Panning logic would go here
+        });
+
+        // Micro-interaction for nodes
+        document.querySelectorAll('.node-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Future: Open Bottom Sheet with Details
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 150);
+            });
+        });
+    </script>
+</body></html>

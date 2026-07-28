@@ -40,6 +40,13 @@
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
+
+  --color-stitch-primary: #0f5238;
+  --color-stitch-primary-container: #2d6a4f;
+  --color-stitch-secondary: #00696c;
+  --color-stitch-secondary-container: #8ff3f6;
+  --color-stitch-surface: #f8f9fa;
+  --color-stitch-surface-container: #edeeef;
 }
 
 :root {

@@ -216,11 +216,6 @@ export default function AdminPage() {
                 Authenticate
               </Button>
             </form>
-
-            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-amber-800 dark:text-amber-300">
-              <p className="font-semibold">Default Password:</p>
-              <p className="font-mono mt-0.5">admin1234</p>
-            </div>
           </Card>
         </main>
         <BottomNavigation />

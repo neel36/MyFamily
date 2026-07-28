@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Family - Settings & Data Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#e7e8e9",
+                    "surface": "#f8f9fa",
+                    "on-tertiary-fixed": "#2c1700",
+                    "inverse-surface": "#2e3132",
+                    "background": "#f8f9fa",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#95d4b3",
+                    "inverse-primary": "#95d4b3",
+                    "on-secondary-fixed": "#002021",
+                    "on-tertiary-container": "#ffd1a5",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#683d00",
+                    "primary-fixed": "#b1f0ce",
+                    "surface-container-low": "#f3f4f5",
+                    "primary-container": "#2d6a4f",
+                    "on-secondary-container": "#007073",
+                    "on-primary-fixed-variant": "#0e5138",
+                    "surface-container": "#edeeef",
+                    "outline": "#707973",
+                    "secondary-container": "#8ff3f6",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#404943",
+                    "surface-dim": "#d9dadb",
+                    "surface-bright": "#f8f9fa",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb86b",
+                    "secondary-fixed-dim": "#72d6da",
+                    "tertiary-fixed": "#ffdcbc",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-error-container": "#93000a",
+                    "primary": "#0f5238",
+                    "on-surface": "#191c1d",
+                    "secondary-fixed": "#8ff3f6",
+                    "inverse-on-surface": "#f0f1f2",
+                    "tertiary-container": "#8a5200",
+                    "surface-variant": "#e1e3e4",
+                    "outline-variant": "#bfc9c1",
+                    "on-background": "#191c1d",
+                    "surface-tint": "#2c694e",
+                    "secondary": "#00696c",
+                    "on-primary-container": "#a8e7c5",
+                    "on-primary-fixed": "#002114",
+                    "on-secondary-fixed-variant": "#004f52",
+                    "tertiary": "#693d00",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xs": "4px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "xl": "40px",
+                    "container-max": "1200px",
+                    "lg": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "title-md": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "label-caps": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .connection-curve {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-gutter py-md w-full sticky top-0 z-50 bg-background dark:bg-background">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="park">park</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim tracking-tight">My Family</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</button>
+</header>
+<main class="max-w-container-max mx-auto px-gutter mt-base">
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Settings & Data</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage your heritage, app preferences, and cloud sync.</p>
+</div>
+<!-- Bento-style Grid for Settings -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Data Backup Section -->
+<section class="md:col-span-8 space-y-md">
+<div class="p-lg rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 transition-all hover:shadow-md">
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-[28px]" data-icon="database">database</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Data Backup</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Secure your family tree data locally or in the cloud.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<!-- Export JSON -->
+<button class="flex flex-col items-start p-md rounded-lg border border-outline-variant hover:bg-surface-container transition-colors group">
+<span class="material-symbols-outlined text-primary mb-base" data-icon="terminal">terminal</span>
+<span class="font-title-md text-on-surface">Export as JSON</span>
+<span class="font-body-sm text-on-surface-variant">Highly compatible developer format.</span>
+</button>
+<!-- Export CSV -->
+<button class="flex flex-col items-start p-md rounded-lg border border-outline-variant hover:bg-surface-container transition-colors group">
+<span class="material-symbols-outlined text-secondary mb-base" data-icon="table_chart">table_chart</span>
+<span class="font-title-md text-on-surface">Export as CSV</span>
+<span class="font-body-sm text-on-surface-variant">Perfect for Excel or Google Sheets.</span>
+</button>
+</div>
+<div class="mt-lg p-md rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#4285F4]" data-icon="cloud_sync">cloud_sync</span>
+</div>
+<div>
+<span class="font-title-md block text-on-surface">Google Drive Sync</span>
+<span class="font-body-sm text-on-surface-variant">Automatic nightly backups</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="mt-lg flex justify-end">
+<button class="px-lg py-sm bg-primary text-on-primary rounded-full font-title-md flex items-center gap-sm shadow-lg hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                            Export Now
+                        </button>
+</div>
+</div>
+<!-- App Preferences Section -->
+<div class="p-lg rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 transition-all hover:shadow-md">
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container text-[28px]" data-icon="settings_suggest">settings_suggest</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface">App Preferences</h3>
+</div>
+<div class="space-y-sm">
+<div class="flex items-center justify-between py-sm border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline" data-icon="language">language</span>
+<span class="font-body-lg text-on-surface">Language</span>
+</div>
+<select class="bg-transparent border-none font-title-md text-primary focus:ring-0 cursor-pointer">
+<option selected="">English (US)</option>
+<option>Español</option>
+<option>Français</option>
+<option>Deutsch</option>
+</select>
+</div>
+<div class="flex items-center justify-between py-sm border-b border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline" data-icon="palette">palette</span>
+<span class="font-body-lg text-on-surface">Theme</span>
+</div>
+<div class="flex bg-surface-container rounded-full p-1">
+<button class="px-4 py-1.5 rounded-full bg-white shadow-sm font-label-caps text-primary">Light</button>
+<button class="px-4 py-1.5 rounded-full font-label-caps text-on-surface-variant hover:text-on-surface">Dark</button>
+</div>
+</div>
+<div class="flex items-center justify-between py-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline" data-icon="notifications">notifications</span>
+<span class="font-body-lg text-on-surface">Anniversary Alerts</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Sidebar / Additional Info -->
+<aside class="md:col-span-4 space-y-lg">
+<!-- About Card -->
+<div class="p-lg rounded-xl bg-primary text-on-primary overflow-hidden relative shadow-lg">
+<div class="absolute -right-4 -bottom-4 opacity-20">
+<span class="material-symbols-outlined text-[120px]" data-icon="park">park</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-headline-lg text-headline-lg-mobile mb-xs">About</h3>
+<p class="font-body-sm mb-lg opacity-90">My Family v2.4.1<br/>Building bridges between generations through technology and storytelling.</p>
+<div class="space-y-sm">
+<a class="flex items-center gap-sm font-label-caps hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span> Help Center
+                            </a>
+<a class="flex items-center gap-sm font-label-caps hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="policy">policy</span> Privacy Policy
+                            </a>
+<a class="flex items-center gap-sm font-label-caps hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span> Terms of Service
+                            </a>
+</div>
+</div>
+</div>
+<!-- Stats/Status Card -->
+<div class="p-lg rounded-xl bg-surface-container shadow-sm border border-outline-variant/30">
+<h3 class="font-label-caps text-outline mb-md uppercase tracking-widest">Storage Status</h3>
+<div class="flex items-end justify-between mb-xs">
+<span class="font-headline-lg text-primary">124 MB</span>
+<span class="font-body-sm text-on-surface-variant">of 2 GB used</span>
+</div>
+<div class="w-full bg-outline-variant/30 rounded-full h-2 mb-lg">
+<div class="bg-primary h-2 rounded-full w-[15%]"></div>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Family Profiles</span>
+<span class="font-bold">248</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Media Assets</span>
+<span class="font-bold">1,042</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Last Sync</span>
+<span class="font-bold">2 hours ago</span>
+</div>
+</div>
+</div>
+<!-- Log out -->
+<button class="w-full py-md rounded-xl border-2 border-error/20 text-error font-title-md flex items-center justify-center gap-sm hover:bg-error/5 transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Sign Out
+                </button>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-label-caps text-label-caps">Tree</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-caps text-label-caps">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-label-caps text-label-caps">Media</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container rounded-full px-4 py-1.5 scale-90 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 100);
+            });
+        });
+
+        // Theme Toggle Logic Placeholder
+        const themeBtns = document.querySelectorAll('button.font-label-caps');
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                themeBtns.forEach(b => {
+                    b.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+                    b.classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('bg-white', 'shadow-sm', 'text-primary');
+                btn.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

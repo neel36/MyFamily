@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Family Member</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .form-input-focus:focus-within {
+            border-color: #0f5238;
+            box-shadow: 0 0 0 1px #0f5238;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfc9c1;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e8e9",
+                        "surface": "#f8f9fa",
+                        "on-tertiary-fixed": "#2c1700",
+                        "inverse-surface": "#2e3132",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#95d4b3",
+                        "inverse-primary": "#95d4b3",
+                        "on-secondary-fixed": "#002021",
+                        "on-tertiary-container": "#ffd1a5",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "primary-fixed": "#b1f0ce",
+                        "surface-container-low": "#f3f4f5",
+                        "primary-container": "#2d6a4f",
+                        "on-secondary-container": "#007073",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "surface-container": "#edeeef",
+                        "outline": "#707973",
+                        "secondary-container": "#8ff3f6",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#404943",
+                        "surface-dim": "#d9dadb",
+                        "surface-bright": "#f8f9fa",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb86b",
+                        "secondary-fixed-dim": "#72d6da",
+                        "tertiary-fixed": "#ffdcbc",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-error-container": "#93000a",
+                        "primary": "#0f5238",
+                        "on-surface": "#191c1d",
+                        "secondary-fixed": "#8ff3f6",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary-container": "#8a5200",
+                        "surface-variant": "#e1e3e4",
+                        "outline-variant": "#bfc9c1",
+                        "on-background": "#191c1d",
+                        "surface-tint": "#2c694e",
+                        "secondary": "#00696c",
+                        "on-primary-container": "#a8e7c5",
+                        "on-primary-fixed": "#002114",
+                        "on-secondary-fixed-variant": "#004f52",
+                        "tertiary": "#693d00",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "xl": "40px",
+                        "container-max": "1200px",
+                        "lg": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen custom-scrollbar">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-gutter py-md w-full sticky top-0 z-50 bg-background dark:bg-background">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Add Member</h1>
+</div>
+<div class="w-10 h-10"></div> <!-- Spacer for balance -->
+</header>
+<main class="max-w-[600px] mx-auto px-gutter pb-xl pt-base">
+<!-- Growth Theme Decorative Background (Atmospheric Shader) -->
+<div class="fixed inset-0 pointer-events-none opacity-10 z-0">
+
+</div>
+<div class="relative z-10">
+<!-- Header/Intro -->
+<div class="mb-lg">
+<p class="font-body-lg text-on-surface-variant">Expand your family tree and preserve the legacy for future generations.</p>
+</div>
+<!-- Profile Photo Upload -->
+<div class="flex flex-col items-center mb-xl">
+<div class="relative group cursor-pointer">
+<div class="w-32 h-32 rounded-full border-4 border-white shadow-lg bg-surface-container-highest flex items-center justify-center overflow-hidden transition-transform group-active:scale-95">
+<span class="material-symbols-outlined text-outline text-5xl group-hover:hidden">person</span>
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-3xl">add_a_photo</span>
+</div>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center shadow-md border-2 border-white">
+<span class="material-symbols-outlined text-sm">edit</span>
+</div>
+</div>
+<span class="mt-md font-label-caps text-label-caps text-primary tracking-widest">UPLOAD PHOTO</span>
+</div>
+<!-- Form Content -->
+<form class="space-y-lg">
+<!-- Full Name -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline ml-1">FULL NAME</label>
+<div class="form-input-focus bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 flex items-center transition-all">
+<span class="material-symbols-outlined text-outline-variant mr-3">badge</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-title-md text-on-surface placeholder:text-outline-variant/60" placeholder="e.g. Eleanor Vance" type="text"/>
+</div>
+</div>
+<!-- Relationship Dropdown -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline ml-1">RELATIONSHIP</label>
+<div class="relative">
+<div class="form-input-focus bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 flex items-center transition-all cursor-pointer">
+<span class="material-symbols-outlined text-outline-variant mr-3">family_history</span>
+<select class="bg-transparent border-none focus:ring-0 w-full font-title-md text-on-surface appearance-none cursor-pointer">
+<option disabled="" selected="" value="">Select relative...</option>
+<option>Parent</option>
+<option>Sibling</option>
+<option>Child</option>
+<option>Spouse</option>
+<option>Grandparent</option>
+<option>Extended Family</option>
+</select>
+<span class="material-symbols-outlined text-outline-variant ml-auto pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Date of Birth -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline ml-1">DATE OF BIRTH</label>
+<div class="form-input-focus bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 flex items-center transition-all">
+<span class="material-symbols-outlined text-outline-variant mr-3">cake</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-title-md text-on-surface cursor-pointer" type="date"/>
+</div>
+</div>
+<!-- Bio -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline ml-1">SHORT BIO</label>
+<div class="form-input-focus bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 flex items-start transition-all">
+<span class="material-symbols-outlined text-outline-variant mr-3 mt-1">history_edu</span>
+<textarea class="bg-transparent border-none focus:ring-0 w-full font-body-lg text-on-surface placeholder:text-outline-variant/60 resize-none" placeholder="Tell a story or add a memory..." rows="4"></textarea>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-md pt-lg">
+<button class="w-full bg-primary text-on-primary font-title-md py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all" type="submit">
+<span class="material-symbols-outlined">save</span>
+                        Save Member
+                    </button>
+<button class="w-full bg-transparent border-2 border-outline-variant text-on-surface-variant font-title-md py-4 rounded-full hover:bg-surface-container-high active:scale-[0.98] transition-all" type="button">
+                        Cancel
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<!-- Bottom Nav Suppression Check: This is a task-focused sub-page, so no Nav Bar is rendered per the Shell Visibility rules. -->
+<script>
+        // Micro-interaction for input fields
+        const inputs = document.querySelectorAll('.form-input-focus');
+        inputs.forEach(input => {
+            input.addEventListener('click', () => {
+                const target = input.querySelector('input, select, textarea');
+                if (target) target.focus();
+            });
+        });
+
+        // Form Submission visual feedback
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Saving...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Member Added';
+                btn.classList.replace('bg-primary', 'bg-secondary');
+            }, 1200);
+        });
+    </script>
+</body></html>
