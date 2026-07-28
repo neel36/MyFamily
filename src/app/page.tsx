@@ -98,12 +98,27 @@ function WelcomeCard({ familyCount }: { familyCount: number }) {
     hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
-      className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-500 to-violet-600 text-white p-6 shadow-lg select-none"
-    >
+    <div className="space-y-4">
+      {/* Web Version Hero Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="overflow-hidden rounded-3xl border border-border/50 bg-card shadow-md"
+      >
+        <img
+          src="/images/hero-banner.png"
+          alt="My Family - Build Your Legacy"
+          className="w-full h-auto max-h-64 object-cover md:object-contain bg-white"
+        />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-500 to-violet-600 text-white p-6 shadow-lg select-none"
+      >
       {/* Decorative blobs */}
       <div className="absolute -top-8 -right-8 h-36 w-36 rounded-full bg-white/10 blur-2xl pointer-events-none" />
       <div className="absolute -bottom-6 -left-6 h-28 w-28 rounded-full bg-indigo-400/20 blur-2xl pointer-events-none" />
@@ -134,8 +149,8 @@ function WelcomeCard({ familyCount }: { familyCount: number }) {
             <span className="text-xs font-semibold text-white">100% Offline & Private</span>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 
