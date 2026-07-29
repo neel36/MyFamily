@@ -943,10 +943,10 @@ function TreePageInner() {
               }}
             >
               <g transform={`translate(${pan.x}, ${pan.y}) scale(${zoom})`}>
-                {visibleTreeRoots.map((root) => (
-                  <React.Fragment key={root.member.id}>
-                    {root.children.map((c) => (
-                      <Connector key={`conn-${root.member.id}-${c.member.id}`} parent={root} child={c} themeColor={themeColors.from} />
+                {allVisibleNodes.map((node) => (
+                  <React.Fragment key={`conns-${node.member.id}`}>
+                    {node.children.map((c) => (
+                      <Connector key={`conn-${node.member.id}-${c.member.id}`} parent={node} child={c} themeColor={themeColors.from} />
                     ))}
                   </React.Fragment>
                 ))}
