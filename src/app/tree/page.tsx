@@ -36,11 +36,11 @@ import { Member } from "@/types/schema";
 // ======================================
 // CONSTANTS & COLOR THEMES
 // ======================================
-const NODE_W = 140;
-const NODE_H = 100;
-const H_GAP = 40;
-const V_GAP = 85;
-const SPOUSE_GAP = 24;
+const NODE_W = 125;
+const NODE_H = 85;
+const H_GAP = 20;
+const V_GAP = 60;
+const SPOUSE_GAP = 14;
 
 const COLOR_THEMES: Record<string, { from: string; to: string; ring: string }> = {
   blue:    { from: "#3b82f6", to: "#4f46e5", ring: "#3b82f6" },
@@ -55,6 +55,10 @@ const COLOR_THEMES: Record<string, { from: string; to: string; ring: string }> =
 function getThemeColors(key?: string) {
   return COLOR_THEMES[key ?? "blue"] ?? COLOR_THEMES.blue;
 }
+
+// ======================================
+// CONNECTOR & NODE SVG COMPONENTS
+// ======================================
 
 // ======================================
 // TREE LAYOUT ALGORITHM & HELPERS
@@ -256,8 +260,10 @@ function Connector({ parent, child, themeColor }: { parent: TreeNode; child: Tre
 
   return (
     <g>
-      <path d={d} fill="none" stroke={themeColor} strokeWidth={3} strokeOpacity={0.25} strokeLinecap="round" />
-      <path d={d} fill="none" stroke={themeColor} strokeWidth={2} strokeOpacity={0.8} strokeDasharray="6 4" strokeLinecap="round" />
+      {/* Outer shadow glow for sharp visibility on dark background */}
+      <path d={d} fill="none" stroke="#000000" strokeWidth={5} strokeOpacity={0.7} strokeLinecap="round" />
+      <path d={d} fill="none" stroke={themeColor} strokeWidth={3.5} strokeOpacity={1} strokeLinecap="round" />
+      <path d={d} fill="none" stroke="#ffffff" strokeWidth={1.5} strokeOpacity={0.95} strokeDasharray="6 4" strokeLinecap="round" />
     </g>
   );
 }
@@ -789,54 +795,54 @@ function TreePageInner() {
   return (
     <div className="flex flex-col min-h-screen bg-background pb-20 md:pb-6">
       {/* Top Header */}
-      <header className="sticky top-0 z-30 bg-background/90 backdrop-blur-xl border-b border-border/40 px-4 py-3 flex flex-col gap-3 shadow-xs">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <button onClick={() => router.back()} className="p-1.5 rounded-xl hover:bg-muted text-muted-foreground">
+      <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2.5 flex flex-col gap-2.5 shadow-xs">
+        <div className="flex items-center justify-between gap-1.5 w-full">
+          <div className="flex items-center gap-1.5 min-w-0 shrink">
+            <button onClick={() => router.back()} className="p-1.5 rounded-xl hover:bg-muted text-muted-foreground shrink-0">
               <ArrowLeft className="h-5 w-5" />
             </button>
 
             {/* Family Select */}
             {families && families.length > 0 && (
-              <div className="relative">
+              <div className="relative min-w-0">
                 <select
                   value={resolvedFamilyId}
                   onChange={(e) => {
                     setSelectedFamilyId(e.target.value);
                     setSelectedMember(undefined);
                   }}
-                  className="appearance-none h-9 pl-3 pr-8 rounded-xl border border-border/50 bg-card text-sm font-extrabold text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer max-w-[180px] truncate"
+                  className="appearance-none h-8.5 pl-2.5 pr-7 rounded-xl border border-border/50 bg-card text-xs sm:text-sm font-extrabold text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer max-w-[130px] sm:max-w-[200px] truncate"
                 >
                   {families.map((f) => (
                     <option key={f.id} value={f.id}>{f.name}</option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground pointer-events-none" />
+                <ChevronDown className="absolute right-2 top-2.5 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
               </div>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 shrink-0">
             {/* View Mode Switcher */}
-            <div className="flex items-center p-1 rounded-xl bg-muted/60 border border-border/40">
+            <div className="flex items-center p-0.5 rounded-xl bg-muted/70 border border-border/40">
               <button
                 onClick={() => setViewMode("cards")}
                 className={cn(
-                  "flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer",
+                  "flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer",
                   viewMode === "cards" ? "bg-card text-primary shadow-xs" : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <Layers className="h-3.5 w-3.5" />
+                <Layers className="h-3 w-3" />
                 Cards
               </button>
               <button
                 onClick={() => setViewMode("canvas")}
                 className={cn(
-                  "flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer",
+                  "flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer",
                   viewMode === "canvas" ? "bg-card text-primary shadow-xs" : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <LayoutGrid className="h-3.5 w-3.5" />
+                <LayoutGrid className="h-3 w-3" />
                 Canvas
               </button>
             </div>
