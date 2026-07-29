@@ -592,9 +592,7 @@ function TreePageInner() {
 
   const families = useFamilies();
   const [selectedFamilyId, setSelectedFamilyId] = React.useState(preselectedFamilyId);
-  const [selectedMember, setSelectedMember] = React.useState<Member | undefined>(undefined);
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [viewMode, setViewMode] = React.useState<"cards" | "canvas">("cards"); // default cards on mobile
+  const [viewMode, setViewMode] = React.useState<"cards" | "canvas">("canvas"); // default canvas for visual family tree
 
   const [zoom, setZoom] = React.useState(1);
   const [pan, setPan] = React.useState({ x: 40, y: 40 });
