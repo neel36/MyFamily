@@ -22,8 +22,13 @@ import {
   Sparkles,
   UserCheck,
   UserX,
+  Download,
+  Loader2,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 import { cn } from "@/lib/utils";
 import { useFamilies, useFamilyMembers } from "@/hooks/use-database";
@@ -754,6 +759,115 @@ function TreePageInner() {
     return () => observer.disconnect();
   }, []);
 
+  const [isExporting, setIsExporting] = React.useState(false);
+
+  const handleExportPDF = async () => {
+    if (!members || members.length === 0) {
+      toast.error("No family members to export");
+      return;
+    }
+
+    setIsExporting(true);
+    const toastId = toast.loading("Generating Family Tree PDF...");
+
+    try {
+      const container = document.createElement("div");
+      container.style.position = "fixed";
+      container.style.top = "-9999px";
+      container.style.left = "-9999px";
+      container.style.backgroundColor = "#ffffff";
+      container.style.color = "#0f172a";
+      container.style.fontFamily = "system-ui, -apple-system, sans-serif";
+      container.style.padding = "32px";
+      container.style.boxSizing = "border-box";
+
+      const familyName = selectedFamily?.name || "Family";
+
+      if (viewMode === "canvas" && viewportRef.current) {
+        const svgEl = viewportRef.current.querySelector("svg");
+        if (svgEl) {
+          const width = Math.max(900, svgBounds.width + 80);
+          const height = Math.max(600, svgBounds.height + 140);
+          container.style.width = `${width}px`;
+          container.style.height = `${height}px`;
+
+          const header = document.createElement("div");
+          header.style.marginBottom = "24px";
+          header.style.paddingBottom = "12px";
+          header.style.borderBottom = "2px solid #0f5238";
+          header.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+              <div>
+                <h1 style="margin: 0; font-size: 26px; font-weight: 800; color: #0f5238;">${familyName} — Family Tree</h1>
+                <p style="margin: 4px 0 0 0; font-size: 13px; color: #475569; font-weight: 500;">
+                  Total Members: ${members.length} · Exported on ${new Date().toLocaleDateString('en-US', { dateStyle: 'medium' })}
+                </p>
+              </div>
+              <span style="font-size: 11px; font-weight: 700; background-color: #b1f0ce; color: #002114; padding: 4px 12px; border-radius: 9999px;">
+                MyFamily Tree
+              </span>
+            </div>
+          `;
+          container.appendChild(header);
+
+          const clonedSvg = svgEl.cloneNode(true) as SVGElement;
+          clonedSvg.setAttribute("width", `${width - 64}`);
+          clonedSvg.setAttribute("height", `${height - 140}`);
+          clonedSvg.style.transform = "none";
+
+          const mainGroup = clonedSvg.querySelector("g");
+          if (mainGroup) {
+            const offsetX = -svgBounds.minX + 32;
+            const offsetY = -svgBounds.minY + 32;
+            mainGroup.setAttribute("transform", `translate(${offsetX}, ${offsetY}) scale(1)`);
+          }
+          container.appendChild(clonedSvg);
+        }
+      } else {
+        container.style.width = "900px";
+        const cardsEl = document.querySelector("main");
+        if (cardsEl) {
+          const clone = cardsEl.cloneNode(true) as HTMLElement;
+          container.appendChild(clone);
+        }
+      }
+
+      document.body.appendChild(container);
+
+      const canvas = await html2canvas(container, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        logging: false,
+      });
+
+      document.body.removeChild(container);
+
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+
+      const pdf = new jsPDF({
+        orientation: imgWidth > imgHeight ? "landscape" : "portrait",
+        unit: "px",
+        format: [imgWidth, imgHeight],
+      });
+
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+      const sanitizedName = familyName.replace(/[^a-zA-Z0-9_\-]/g, "_");
+      pdf.save(`${sanitizedName}_Family_Tree.pdf`);
+
+      toast.success("Family Tree PDF downloaded successfully!", { id: toastId });
+    } catch (err) {
+      console.error("PDF generation error:", err);
+      toast.error("Failed to generate PDF. Please try again.", { id: toastId });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   // Filter members for search in Cards view
   const filteredTreeRoots = React.useMemo(() => {
     if (!searchQuery.trim()) return treeRoots;
@@ -817,6 +931,17 @@ function TreePageInner() {
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
+            {/* Export PDF Button */}
+            <button
+              onClick={handleExportPDF}
+              disabled={isExporting || !members || members.length === 0}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-extrabold bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-all cursor-pointer shadow-xs active:scale-95"
+              title="Export Family Tree to PDF"
+            >
+              {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">Export PDF</span>
+            </button>
+
             {/* View Mode Switcher */}
             <div className="flex items-center p-0.5 rounded-xl bg-muted/70 border border-border/40">
               <button
