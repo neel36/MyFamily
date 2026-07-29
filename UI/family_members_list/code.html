@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfc9c1;
+            border-radius: 10px;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 8px rgba(15, 82, 56, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+        .organic-curve {
+            border-radius: 24px 8px 24px 8px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0f5238",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#8a5200",
+                        "tertiary-fixed-dim": "#ffb86b",
+                        "secondary-container": "#8ff3f6",
+                        "surface-tint": "#2c694e",
+                        "outline": "#707973",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#007073",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed-dim": "#95d4b3",
+                        "on-tertiary-fixed": "#2c1700",
+                        "tertiary": "#693d00",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-secondary-fixed": "#002021",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#edeeef",
+                        "secondary": "#00696c",
+                        "secondary-fixed": "#8ff3f6",
+                        "inverse-primary": "#95d4b3",
+                        "surface-bright": "#f8f9fa",
+                        "on-secondary-fixed-variant": "#004f52",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdcbc",
+                        "inverse-surface": "#2e3132",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#bfc9c1",
+                        "on-tertiary-container": "#ffd1a5",
+                        "primary-container": "#2d6a4f",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "background": "#f8f9fa",
+                        "on-background": "#191c1d",
+                        "on-surface": "#191c1d",
+                        "secondary-fixed-dim": "#72d6da",
+                        "surface-container-high": "#e7e8e9",
+                        "on-primary-container": "#a8e7c5",
+                        "on-surface-variant": "#404943",
+                        "on-primary-fixed": "#002114",
+                        "primary-fixed": "#b1f0ce",
+                        "surface-dim": "#d9dadb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "xl": "40px",
+                        "lg": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-md py-base">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="forest">forest</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">My Family</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary-container/10 transition-colors duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-md pt-lg">
+<!-- Search & Filter Section -->
+<section class="mb-lg space-y-md">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="block w-full pl-11 pr-md py-3 bg-surface-container border-none rounded-xl focus:ring-2 focus:ring-primary text-body-lg placeholder:text-outline transition-all" placeholder="Search family members..." type="text"/>
+</div>
+<div class="flex gap-sm overflow-x-auto pb-2 custom-scrollbar">
+<button class="flex items-center gap-xs px-md py-2 bg-primary text-on-primary rounded-full font-label-caps text-label-caps whitespace-nowrap active:scale-95 transition-transform">
+                    All Members
+                </button>
+<button class="flex items-center gap-xs px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-highest transition-colors">
+                    Immediate
+                </button>
+<button class="flex items-center gap-xs px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-highest transition-colors">
+                    Maternal
+                </button>
+<button class="flex items-center gap-xs px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-highest transition-colors">
+                    Paternal
+                </button>
+</div>
+</section>
+<!-- Members Grid/List -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Person Card 1 -->
+<div class="bg-surface-container-lowest organic-curve p-md card-shadow border border-primary/5 flex items-center gap-md group hover:bg-primary-container/5 transition-all duration-300">
+<div class="relative w-20 h-20 flex-shrink-0">
+<div class="absolute inset-0 rounded-full border-2 border-primary rotate-12 group-hover:rotate-45 transition-transform duration-500"></div>
+<img class="w-full h-full object-cover rounded-full p-1" data-alt="A warm, professional studio portrait of an elderly gentleman with kind eyes and a grey beard, wearing a classic dark green sweater. The background is a soft, blurred library setting, emphasizing a sense of wisdom and heritage. The lighting is golden and high-key, aligning with a nurturing growth aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYOfai9x4jmB20Xe9diCoaZzzuv5mXnEltJReDVlokoieeVv_1wzNJ59GKxTqDsoMvjLturZIKAvGRcr5ND_nQ5I0bw-UvBR-kddvbcsBiahfNskVc-rz6neEQy_ONMXoX0QawAGkUAFaTp8J6V5_vgiSMbU7g50KVk0QJ_maoLn4TfYtDUmlm9kCEyndhRDGXX4N9Ep1LL6OppsHll_CL-W6INH2ipNFVEVoWJbaYP_JPCflIw8g"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Arthur Thorne</h3>
+<p class="text-body-sm font-label-caps text-outline uppercase tracking-wider">Grandfather</p>
+</div>
+<span class="text-label-caps font-label-caps bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded">1945</span>
+</div>
+<div class="mt-base flex items-center gap-xs text-primary font-medium text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="history">history</span>
+<span>12 Stories shared</span>
+</div>
+</div>
+</div>
+<!-- Person Card 2 -->
+<div class="bg-surface-container-lowest organic-curve p-md card-shadow border border-secondary/5 flex items-center gap-md group hover:bg-secondary-container/5 transition-all duration-300">
+<div class="relative w-20 h-20 flex-shrink-0">
+<div class="absolute inset-0 rounded-full border-2 border-secondary -rotate-12 group-hover:-rotate-45 transition-transform duration-500"></div>
+<img class="w-full h-full object-cover rounded-full p-1" data-alt="A vibrant, joyful portrait of a woman in her late 40s with curly hair and a bright smile, set against a lush garden backdrop with blooming flowers. She wears a cream-colored linen shirt. The image has a clean, modern feel with soft, natural morning sunlight, evoking connection and optimism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyjvL4yK6O9Pn6osJWG4wqRBlYy0rHxT0x-n5ZzQixXnr_30mztHA1MxqNiD2e3MQusURuKsME_vjaXlMh9P7urKYSh7M4p8Cd3DsFfOw5jI3B4tAcgWIufARfX8w3iTLZkXUTGONyUdcqaz6yW8hzJkSfsA3jH4Rvqe1JaVpKCLNUg2Y7ag57zer2l0jebLNTzdJuie5MUdGCPUX6zHls9yK1RlTmmtmKbcnzH9UE2bIU0qH1A-c"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Eleanor Vance</h3>
+<p class="text-body-sm font-label-caps text-outline uppercase tracking-wider">Mother</p>
+</div>
+<span class="text-label-caps font-label-caps bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded">1978</span>
+</div>
+<div class="mt-base flex items-center gap-xs text-secondary font-medium text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="photo_library">photo_library</span>
+<span>452 Photos</span>
+</div>
+</div>
+</div>
+<!-- Person Card 3 -->
+<div class="bg-surface-container-lowest organic-curve p-md card-shadow border border-tertiary/5 flex items-center gap-md group hover:bg-tertiary-container/5 transition-all duration-300">
+<div class="relative w-20 h-20 flex-shrink-0">
+<div class="absolute inset-0 rounded-full border-2 border-tertiary rotate-6 group-hover:rotate-90 transition-transform duration-700"></div>
+<img class="w-full h-full object-cover rounded-full p-1" data-alt="A candid, heartwarming photo of a young man in his early 20s with short hair, laughing and looking off-camera. He is in a modern workspace with wood accents and green plants. The mood is optimistic and fresh, with bright lighting and a crisp, minimalist photographic style that feels deeply personal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCvV73DmJ1HLl7WvdKV036aPDLtoWtmp35nJTnMPXMa39rODWMD0g2yR3TvnIr7z7npXBGKw9tt9rRn1LZMdAkHFl9Z1pgOmoREMGdqZUDYVd2HlKEJT4pcQw8Hc5UcSFWPGQo8HHYpicSh9tiKbXVSWlGLHlT4S5BkS854hC2L-yR5gpg185xQIJaxK03TJT4vz2alxpCkmxbs_H0tiW22Mo36Vj6VGsqP4ei4pwA-gXvbB1x5gE"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Julian Thorne</h3>
+<p class="text-body-sm font-label-caps text-outline uppercase tracking-wider">Brother</p>
+</div>
+<span class="text-label-caps font-label-caps bg-primary-fixed text-on-primary-fixed px-2 py-0.5 rounded">2002</span>
+</div>
+<div class="mt-base flex items-center gap-xs text-tertiary font-medium text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span>London, UK</span>
+</div>
+</div>
+</div>
+<!-- Person Card 4 -->
+<div class="bg-surface-container-lowest organic-curve p-md card-shadow border border-primary/5 flex items-center gap-md group hover:bg-primary-container/5 transition-all duration-300">
+<div class="relative w-20 h-20 flex-shrink-0">
+<div class="absolute inset-0 rounded-full border-2 border-primary -rotate-6 group-hover:rotate-0 transition-transform duration-500"></div>
+<img class="w-full h-full object-cover rounded-full p-1" data-alt="A nostalgic, high-quality scan of a vintage black and white photograph of a young woman from the 1920s, styled with a classic cloche hat. The photo is restored with a subtle sepia tint to fit the warm Heritage theme. The background is clean white, making the historic portrait stand out with modern elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA2msHEqMY53StZsUjig1ZXw00I63t2nhhzsoPnobIvggXjY755v_QoQWGF3rH4RyWpLkBNjeopQLzSNMCBuvBZkbR59ckPM1S1F06v8cj6UAemaFtuSO6_iWuJggJ8q1BdjURT_DYfY4AyrxJQjU-0DVkwjIXF3OcESVtNo9_4_6QlfXQx1KUq_UuFurfgxMUTtxiroJSyEPYcdUIKQl12J47sM_WHeuEp248zL-iPdz66LwBYfE"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Clara Thorne</h3>
+<p class="text-body-sm font-label-caps text-outline uppercase tracking-wider">Great-Aunt</p>
+</div>
+<span class="text-label-caps font-label-caps bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded">1895</span>
+</div>
+<div class="mt-base flex items-center gap-xs text-primary font-medium text-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="auto_stories">auto_stories</span>
+<span>Historical Record</span>
+</div>
+</div>
+</div>
+<!-- Empty State / Add Action -->
+<div class="border-2 border-dashed border-outline-variant organic-curve p-md flex flex-col items-center justify-center gap-sm text-outline hover:border-primary hover:text-primary transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase">Add Relative</span>
+</div>
+</div>
+<!-- Section for Growth/Stats (Bento style) -->
+<section class="mt-xl grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="md:col-span-2 bg-primary-container/20 rounded-3xl p-lg flex flex-col justify-between relative overflow-hidden">
+<div class="z-10">
+<h4 class="font-headline-lg text-primary mb-xs">Tree Growth</h4>
+<p class="text-body-sm text-on-primary-fixed-variant opacity-80 max-w-xs">You've added 12 new members this month. Your heritage is expanding!</p>
+</div>
+<div class="mt-lg z-10">
+<span class="text-[48px] font-extrabold text-primary">128</span>
+<span class="font-label-caps text-label-caps text-primary ml-xs">Total Members</span>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-primary/10 rotate-12" data-icon="nature">nature</span>
+</div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed rounded-3xl p-lg flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-[40px] mb-base" data-icon="celebration">celebration</span>
+<p class="font-label-caps text-label-caps uppercase mb-xs">Upcoming</p>
+<h4 class="font-title-md">Arthur's 80th Birthday</h4>
+<p class="text-body-sm mt-xs font-semibold">In 3 days</p>
+</div>
+</section>
+</main>
+<!-- Bottom Action Button (Floating Action Button style for "Members") -->
+<button class="fixed bottom-24 right-md w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl flex items-center justify-center active:scale-90 transition-transform z-50">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-gutter pb-6 pt-2 bg-surface dark:bg-surface-container shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-50 rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high dark:hover:bg-surface-container-highest cursor-pointer">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-label-caps text-label-caps">Tree</span>
+</div>
+<!-- ACTIVE TAB: Members -->
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 active:scale-95 transition-transform duration-150 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-caps text-label-caps">Members</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high dark:hover:bg-surface-container-highest cursor-pointer">
+<span class="material-symbols-outlined" data-icon="perm_media">perm_media</span>
+<span class="font-label-caps text-label-caps">Media</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 active:scale-95 transition-transform duration-150 hover:bg-surface-container-high dark:hover:bg-surface-container-highest cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</div>
+</nav>
+<script>
+        // Simple search filtering interaction simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        const cards = document.querySelectorAll('.grid > div');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const name = card.querySelector('h3')?.textContent.toLowerCase() || "";
+                const relation = card.querySelector('p')?.textContent.toLowerCase() || "";
+                if (name.includes(query) || relation.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    if(!card.classList.contains('border-dashed')) {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Add micro-interaction to cards
+        cards.forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

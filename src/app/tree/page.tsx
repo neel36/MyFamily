@@ -34,22 +34,20 @@ import { Avatar, Badge, Skeleton } from "@/components/ui/feedback";
 import { Member } from "@/types/schema";
 
 // ======================================
-// CONSTANTS & COLOR THEMES
+// CONSTANTS & COLOR THEMES (Kinship & Growth Design System)
 // ======================================
-const NODE_W = 125;
-const NODE_H = 85;
-const H_GAP = 20;
-const V_GAP = 60;
-const SPOUSE_GAP = 14;
+const NODE_W = 180;
+const NODE_H = 150;
+const H_GAP = 30;
+const V_GAP = 75;
+const SPOUSE_GAP = 20;
 
-const COLOR_THEMES: Record<string, { from: string; to: string; ring: string }> = {
-  blue:    { from: "#3b82f6", to: "#4f46e5", ring: "#3b82f6" },
-  emerald: { from: "#10b981", to: "#0d9488", ring: "#10b981" },
-  orange:  { from: "#f97316", to: "#f43f5e", ring: "#f97316" },
-  violet:  { from: "#8b5cf6", to: "#7c3aed", ring: "#8b5cf6" },
-  rose:    { from: "#ec4899", to: "#f43f5e", ring: "#ec4899" },
-  amber:   { from: "#f59e0b", to: "#f97316", ring: "#f59e0b" },
-  teal:    { from: "#14b8a6", to: "#0891b2", ring: "#14b8a6" },
+const COLOR_THEMES: Record<string, { from: string; border: string; badgeBg: string; badgeText: string }> = {
+  blue:    { from: "#0f5238", border: "#2d6a4f", badgeBg: "#b1f0ce", badgeText: "#002114" },
+  emerald: { from: "#00696c", border: "#007073", badgeBg: "#8ff3f6", badgeText: "#002021" },
+  orange:  { from: "#693d00", border: "#8a5200", badgeBg: "#ffdcbc", badgeText: "#2c1700" },
+  violet:  { from: "#4c1d95", border: "#6d28d9", badgeBg: "#ddd6fe", badgeText: "#2e1065" },
+  rose:    { from: "#9f1239", border: "#be123c", badgeBg: "#fecdd3", badgeText: "#4c0519" },
 };
 
 function getThemeColors(key?: string) {
@@ -244,7 +242,7 @@ function collectVisibleNodes(roots: TreeNode[], collapsedIds: Set<string>): Tree
 }
 
 // ======================================
-// CONNECTOR & NODE SVG COMPONENTS
+// CONNECTOR & NODE SVG COMPONENTS (Kinship & Growth Style)
 // ======================================
 function Connector({ parent, child, themeColor }: { parent: TreeNode; child: TreeNode; themeColor: string }) {
   const hasSpouse = Boolean(parent.spouse) && parent.spouseX !== undefined;
@@ -260,10 +258,7 @@ function Connector({ parent, child, themeColor }: { parent: TreeNode; child: Tre
 
   return (
     <g>
-      {/* Outer shadow glow for sharp visibility on dark background */}
-      <path d={d} fill="none" stroke="#000000" strokeWidth={5} strokeOpacity={0.7} strokeLinecap="round" />
-      <path d={d} fill="none" stroke={themeColor} strokeWidth={3.5} strokeOpacity={1} strokeLinecap="round" />
-      <path d={d} fill="none" stroke="#ffffff" strokeWidth={1.5} strokeOpacity={0.95} strokeDasharray="6 4" strokeLinecap="round" />
+      <path d={d} fill="none" stroke="#2d6a4f" strokeWidth={4} strokeOpacity={0.4} strokeLinecap="round" />
     </g>
   );
 }
@@ -317,42 +312,34 @@ function MemberNode({
     >
       <defs>
         <clipPath id={avatarId}>
-          <circle cx={NODE_W / 2} cy={34} r={20} />
+          <circle cx={NODE_W / 2} cy={48} r={32} />
         </clipPath>
-        <linearGradient id={`grad-${member.id.replace(/[^a-zA-Z0-9]/g, "_")}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={gender.color} stopOpacity="0.15" />
-          <stop offset="100%" stopColor={themeColor} stopOpacity="0.05" />
-        </linearGradient>
       </defs>
 
+      {/* Node Main Card Body */}
       <rect
         width={NODE_W}
         height={NODE_H}
-        rx={18}
-        ry={18}
-        fill={isHighlighted ? themeColor : "var(--color-card)"}
-        stroke={isHighlighted ? "#ffffff" : gender.color}
-        strokeWidth={isHighlighted ? 3 : hovered ? 2.5 : 1.5}
-        strokeOpacity={isHighlighted ? 1 : hovered ? 0.9 : 0.4}
+        rx={16}
+        ry={16}
+        fill="var(--color-card)"
+        stroke={isHighlighted ? "#0f5238" : "var(--color-border)"}
+        strokeWidth={isHighlighted ? 3 : 1.5}
         style={{
           filter: hovered || isHighlighted
-            ? "drop-shadow(0 10px 24px rgba(0,0,0,0.18))"
-            : "drop-shadow(0 4px 10px rgba(0,0,0,0.06))",
+            ? "drop-shadow(0 12px 24px rgba(15,82,56,0.18))"
+            : "drop-shadow(0 4px 12px rgba(0,0,0,0.06))",
           transition: "all 0.25s ease-out",
         }}
       />
 
-      {!isHighlighted && (
-        <rect width={NODE_W} height={NODE_H} rx={18} ry={18} fill={`url(#grad-${member.id.replace(/[^a-zA-Z0-9]/g, "_")})`} pointerEvents="none" />
-      )}
+      {/* Top Accent Line */}
+      <path
+        d={`M 0 16 A 16 16 0 0 1 16 0 L ${NODE_W - 16} 0 A 16 16 0 0 1 ${NODE_W} 16 L ${NODE_W} 22 L 0 22 Z`}
+        fill={member.gender === "male" ? "#0f5238" : member.gender === "female" ? "#00696c" : "#8a5200"}
+      />
 
-      {!member.alive && <rect width={NODE_W} height={NODE_H} rx={18} ry={18} fill="rgba(15,23,42,0.12)" />}
-
-      <rect x={10} y={10} width={22} height={22} rx={11} fill={gender.color} opacity={isHighlighted ? 0.9 : 0.15} />
-      <text x={21} y={25.5} textAnchor="middle" fontSize={11} fontWeight={800} fill={isHighlighted ? "#ffffff" : gender.color}>
-        {gender.symbol}
-      </text>
-
+      {/* Toggle collapse badge */}
       {hasChildren && (
         <g
           onClick={(e) => {
@@ -361,36 +348,43 @@ function MemberNode({
           }}
           style={{ cursor: "pointer" }}
         >
-          <circle cx={NODE_W - 21} cy={21} r={11} fill={isHighlighted ? "#ffffff" : "var(--color-background)"} stroke={gender.color} strokeWidth={1.5} />
-          <text x={NODE_W - 21} y={25} textAnchor="middle" fontSize={13} fontWeight={800} fill={isHighlighted ? themeColor : "var(--color-foreground)"}>
+          <circle cx={NODE_W - 16} cy={32} r={10} fill="var(--color-background)" stroke="#2d6a4f" strokeWidth={1.5} />
+          <text x={NODE_W - 16} y={35.5} textAnchor="middle" fontSize={12} fontWeight={800} fill="#0f5238">
             {isCollapsed ? "+" : "−"}
           </text>
         </g>
       )}
 
+      {/* Member Avatar */}
       {member.photo ? (
         <g>
-          <circle cx={NODE_W / 2} cy={34} r={21} fill="none" stroke={gender.color} strokeWidth={2} />
-          <image href={member.photo} x={NODE_W / 2 - 20} y={14} width={40} height={40} clipPath={`url(#${avatarId})`} preserveAspectRatio="xMidYMid slice" />
+          <circle cx={NODE_W / 2} cy={48} r={34} fill="none" stroke={member.gender === "male" ? "#95d4b3" : "#8ff3f6"} strokeWidth={2.5} />
+          <image href={member.photo} x={NODE_W / 2 - 32} y={16} width={64} height={64} clipPath={`url(#${avatarId})`} preserveAspectRatio="xMidYMid slice" />
         </g>
       ) : (
-        <>
-          <circle cx={NODE_W / 2} cy={34} r={20} fill={isHighlighted ? "rgba(255,255,255,0.25)" : gender.color} opacity={isHighlighted ? 1 : 0.2} />
-          <text x={NODE_W / 2} y={39} textAnchor="middle" fontSize={13} fontWeight={800} fill={isHighlighted ? "#ffffff" : gender.color}>
+        <g>
+          <circle cx={NODE_W / 2} cy={48} r={32} fill={member.gender === "male" ? "#b1f0ce" : "#8ff3f6"} opacity={0.9} />
+          <text x={NODE_W / 2} y={54} textAnchor="middle" fontSize={16} fontWeight={800} fill={member.gender === "male" ? "#002114" : "#002021"}>
             {initials}
           </text>
-        </>
+        </g>
       )}
 
-      <text x={NODE_W / 2} y={68} textAnchor="middle" fontSize={11} fontWeight={800} fill={isHighlighted ? "#ffffff" : "var(--color-foreground)"} style={{ letterSpacing: "-0.01em" }}>
-        {member.name.length > 16 ? `${member.name.slice(0, 15)}…` : member.name}
+      {/* Member Name */}
+      <text x={NODE_W / 2} y={98} textAnchor="middle" fontSize={13} fontWeight={700} fill="var(--color-foreground)">
+        {member.name.length > 18 ? `${member.name.slice(0, 17)}…` : member.name}
       </text>
 
-      <text x={NODE_W / 2} y={85} textAnchor="middle" fontSize={9} fontWeight={600} fill={isHighlighted ? "rgba(255,255,255,0.85)" : "var(--color-muted-foreground)"}>
-        {isSpouse ? `Spouse ${ageText ? `· ${ageText}` : ""}` : member.alive ? (ageText ?? "Alive") : "Deceased"}
+      {/* Member Years / Status */}
+      <text x={NODE_W / 2} y={116} textAnchor="middle" fontSize={10} fontWeight={500} fill="var(--color-muted-foreground)">
+        {isSpouse ? `Spouse ${ageText ? `· ${ageText}` : ""}` : member.alive ? (ageText ? `Age ${ageText}` : "Alive") : "Deceased"}
       </text>
 
-      <circle cx={NODE_W - 12} cy={NODE_H - 12} r={4.5} fill={member.alive ? "#22c55e" : "#ef4444"} stroke="var(--color-card)" strokeWidth={1.5} />
+      {/* Badge Tag */}
+      <rect x={NODE_W / 2 - 36} y={124} width={72} height={16} rx={8} fill={member.gender === "male" ? "#b1f0ce" : "#ffdcbc"} />
+      <text x={NODE_W / 2} y={135} textAnchor="middle" fontSize={8.5} fontWeight={800} fill={member.gender === "male" ? "#002114" : "#2c1700"} style={{ letterSpacing: "0.04em" }}>
+        {isSpouse ? "SPOUSE" : member.gender === "male" ? "MALE" : "FEMALE"}
+      </text>
     </g>
   );
 }

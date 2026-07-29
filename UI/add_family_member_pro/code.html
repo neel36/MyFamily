@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Family Member | My Family</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#0f5238",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#8a5200",
+                    "tertiary-fixed-dim": "#ffb86b",
+                    "secondary-container": "#8ff3f6",
+                    "surface-tint": "#2c694e",
+                    "outline": "#707973",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#007073",
+                    "surface-variant": "#e1e3e4",
+                    "primary-fixed-dim": "#95d4b3",
+                    "on-tertiary-fixed": "#2c1700",
+                    "tertiary": "#693d00",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-secondary-fixed": "#002021",
+                    "surface-container-low": "#f3f4f5",
+                    "inverse-on-surface": "#f0f1f2",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#edeeef",
+                    "secondary": "#00696c",
+                    "secondary-fixed": "#8ff3f6",
+                    "inverse-primary": "#95d4b3",
+                    "surface-bright": "#f8f9fa",
+                    "on-secondary-fixed-variant": "#004f52",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffdcbc",
+                    "inverse-surface": "#2e3132",
+                    "surface": "#f8f9fa",
+                    "outline-variant": "#bfc9c1",
+                    "on-tertiary-container": "#ffd1a5",
+                    "primary-container": "#2d6a4f",
+                    "on-primary-fixed-variant": "#0e5138",
+                    "on-tertiary-fixed-variant": "#683d00",
+                    "background": "#f8f9fa",
+                    "on-background": "#191c1d",
+                    "on-surface": "#191c1d",
+                    "secondary-fixed-dim": "#72d6da",
+                    "surface-container-high": "#e7e8e9",
+                    "on-primary-container": "#a8e7c5",
+                    "on-surface-variant": "#404943",
+                    "on-primary-fixed": "#002114",
+                    "primary-fixed": "#b1f0ce",
+                    "surface-dim": "#d9dadb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "12px",
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "xl": "40px",
+                    "lg": "24px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "title-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-caps": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .step-active { color: var(--tw-color-primary); }
+        .step-inactive { color: var(--tw-color-outline-variant); }
+        
+        /* Custom curve for organic growth feel */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(15, 82, 56, 0.1);
+        }
+
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen">
+<!-- Top Navigation Anchor -->
+<header class="sticky top-0 w-full z-40 bg-surface/80 backdrop-blur-md shadow-sm flex justify-between items-center px-md py-base">
+<div class="flex items-center gap-sm">
+<button class="p-xs rounded-full hover:bg-primary-container/10 transition-colors" onclick="history.back()">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Add Member</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="forest">forest</span>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-md py-lg pb-32">
+<!-- Progress Stepper -->
+<nav class="mb-xl flex items-center justify-between px-md">
+<div class="flex flex-col items-center gap-xs" id="step-indicator-1">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-md transition-all duration-300">1</div>
+<span class="font-label-caps text-label-caps text-primary">Personal</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mx-xs mb-6 opacity-30" id="line-1"></div>
+<div class="flex flex-col items-center gap-xs opacity-40" id="step-indicator-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant font-bold transition-all duration-300">2</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Family</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mx-xs mb-6 opacity-30" id="line-2"></div>
+<div class="flex flex-col items-center gap-xs opacity-40" id="step-indicator-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant font-bold transition-all duration-300">3</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Bio</span>
+</div>
+</nav>
+<!-- Form Container -->
+<form class="space-y-lg" id="add-member-form">
+<!-- Section 1: Personal Info -->
+<section class="space-y-lg animate-in fade-in slide-in-from-bottom-4 duration-500" id="section-1">
+<div class="flex flex-col items-center justify-center py-base">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full border-4 border-primary/20 p-1 flex items-center justify-center overflow-hidden bg-surface-container shadow-inner">
+<img class="w-full h-full object-cover rounded-full" data-alt="A bright, artistic portrait of an elderly smiling man with white hair, captured in warm morning sunlight with a soft-focus background of lush green garden foliage, representing legacy and heritage in a high-end photography style with rich organic tones." id="avatar-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoe6WaCzNgnGMJk-rylxpXt2Hsj-m26sFvngEMnrfrCpKmP01dICBnYRAukPMs_i1831Hfr5nC7DGaaqrx0ba3apUwgSHEdvwsNfkHkSCVJe4R61XcjBqKMEahZaAtfJ6tFcArlV1zmVm7OJyt0_pA8YA1T9AyhiwoHwRHgXcPwIQvoTO6y2cpkzbHUKo3lVnWcuH0LXU1BTQNTOsdTnq_iGjBZLUlyuIWytBN-t3GgUQxBfVrqLA"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary p-base rounded-full shadow-lg hover:scale-105 transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-md">photo_camera</span>
+</button>
+</div>
+<p class="mt-sm font-label-caps text-label-caps text-primary/60">Upload Profile Photo</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">First Name</label>
+<input class="w-full px-md py-base rounded-xl border-2 border-outline-variant focus:border-primary focus:ring-0 bg-surface-bright transition-all outline-none" placeholder="e.g. Jonathan" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">Last Name</label>
+<input class="w-full px-md py-base rounded-xl border-2 border-outline-variant focus:border-primary focus:ring-0 bg-surface-bright transition-all outline-none" placeholder="e.g. Miller" type="text"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">Birth Date</label>
+<div class="relative">
+<input class="w-full px-md py-base rounded-xl border-2 border-outline-variant focus:border-primary focus:ring-0 bg-surface-bright transition-all outline-none appearance-none" type="date"/>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-outline pointer-events-none">calendar_today</span>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">Birth Place</label>
+<div class="relative">
+<input class="w-full px-md py-base rounded-xl border-2 border-outline-variant focus:border-primary focus:ring-0 bg-surface-bright transition-all outline-none" placeholder="City, Country" type="text"/>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-outline pointer-events-none">location_on</span>
+</div>
+</div>
+</section>
+<!-- Section 2: Relationship (Hidden by default) -->
+<section class="hidden space-y-lg animate-in fade-in slide-in-from-right-4 duration-500" id="section-2">
+<div class="bg-secondary-container/10 p-lg rounded-3xl border border-secondary/10">
+<h3 class="font-title-md text-title-md text-secondary mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined">family_history</span>
+                        Connect to Tree
+                    </h3>
+<div class="space-y-lg">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">Primary Relation</label>
+<select class="w-full px-md py-base rounded-xl border-2 border-outline-variant focus:border-primary focus:ring-0 bg-surface-bright transition-all outline-none appearance-none">
+<option>Select Relation</option>
+<option>Parent</option>
+<option>Child</option>
+<option>Sibling</option>
+<option>Spouse</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">Related To</label>
+<div class="flex items-center gap-md p-base bg-surface rounded-xl border border-outline-variant/30 hover:border-primary transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist professional studio headshot of a middle-aged woman with a kind expression and dark hair, set against a soft beige background, matching the clean and high-end aesthetic of a modern genealogy application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkvpUUyo3graEaN583PH17uj1LOQu2PjJ9K6BuO1TI7KIgS7uoK179zV7umEoUeWSz-a5WSQd4umOXZb4ooV0SQOap3Fn2rJTA88BoTJgerE5mgWsZCDp626FvKBCc0nubN5Nl3QIRzfAK2-g-MVLfyMxb_m05AosLqObnHBxZPFZ2kRhhtIUUxz9dtMPZ_02spyYmNqdNnn-6aaZJW1U4ZH_2M-1P8XOaGIPFddRnSkVm5LFA2tc"/>
+</div>
+<div class="flex-1">
+<p class="font-title-md text-title-md text-on-surface leading-tight">Eleanor Miller</p>
+<p class="text-body-sm text-on-surface-variant">Mother (Living)</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">swap_horiz</span>
+</div>
+</div>
+<div class="flex items-center gap-sm p-sm">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">diversity_1</span>
+</div>
+<p class="text-body-sm text-on-surface-variant italic">Connecting this person will automatically generate branch lines in your main family forest map.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Biography (Hidden by default) -->
+<section class="hidden space-y-lg animate-in fade-in slide-in-from-right-4 duration-500" id="section-3">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">Short Biography</label>
+<textarea class="w-full px-md py-base rounded-xl border-2 border-outline-variant focus:border-primary focus:ring-0 bg-surface-bright transition-all outline-none resize-none" placeholder="Tell their story... Where they grew up, their passions, their legacy." rows="6"></textarea>
+</div>
+<div class="space-y-base">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-xs">Life Tags</label>
+<div class="flex flex-wrap gap-sm">
+<button class="px-md py-xs rounded-full bg-primary-fixed text-on-primary-fixed text-body-sm font-semibold border border-primary/10" type="button">Veteran</button>
+<button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant text-body-sm font-semibold border border-outline-variant/30" type="button">Artist</button>
+<button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant text-body-sm font-semibold border border-outline-variant/30" type="button">Teacher</button>
+<button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant text-body-sm font-semibold border border-outline-variant/30" type="button">Immigrant</button>
+<button class="px-md py-xs rounded-full bg-surface-container-high text-primary font-bold border border-primary/20" type="button">
+<span class="material-symbols-outlined text-sm inline-block translate-y-1">add</span> Tag
+                        </button>
+</div>
+</div>
+</section>
+</form>
+</main>
+<!-- Bottom Actions Shell -->
+<footer class="fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-xl p-md border-t border-outline-variant/10 z-50">
+<div class="max-w-3xl mx-auto flex gap-md">
+<button class="hidden flex-1 py-4 px-lg rounded-2xl border-2 border-outline text-on-surface font-title-md hover:bg-surface-container-high transition-colors active:scale-95" id="prev-btn" onclick="prevStep()">
+                Back
+            </button>
+<button class="flex-1 py-4 px-lg rounded-2xl bg-surface-container-highest text-on-surface-variant font-title-md hover:bg-surface-dim transition-colors active:scale-95" id="cancel-btn">
+                Cancel
+            </button>
+<button class="flex-[2] py-4 px-lg rounded-2xl bg-primary text-on-primary font-title-md shadow-xl shadow-primary/20 hover:brightness-110 transition-all active:scale-95 flex items-center justify-center gap-base" id="next-btn" onclick="nextStep()">
+                Next <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="hidden flex-[2] py-4 px-lg rounded-2xl bg-primary text-on-primary font-title-md shadow-xl shadow-primary/20 hover:brightness-110 transition-all active:scale-95 flex items-center justify-center gap-base" id="save-btn">
+                Save Member <span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+</footer>
+<script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateUI() {
+            // Update sections
+            for (let i = 1; i <= totalSteps; i++) {
+                const section = document.getElementById(`section-${i}`);
+                const indicator = document.getElementById(`step-indicator-${i}`);
+                const line = document.getElementById(`line-${i-1}`);
+
+                if (i === currentStep) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+
+                // Indicators
+                if (i <= currentStep) {
+                    indicator.classList.remove('opacity-40');
+                    indicator.querySelector('div').classList.add('bg-primary', 'text-on-primary');
+                    indicator.querySelector('div').classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+                } else {
+                    indicator.classList.add('opacity-40');
+                    indicator.querySelector('div').classList.remove('bg-primary', 'text-on-primary');
+                    indicator.querySelector('div').classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+                }
+            }
+
+            // Update lines
+            if(currentStep > 1) document.getElementById('line-1').classList.remove('opacity-30');
+            if(currentStep > 2) document.getElementById('line-2').classList.remove('opacity-30');
+
+            // Button Logic
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const saveBtn = document.getElementById('save-btn');
+
+            if (currentStep === 1) {
+                prevBtn.classList.add('hidden');
+                cancelBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+                saveBtn.classList.add('hidden');
+            } else if (currentStep === totalSteps) {
+                prevBtn.classList.remove('hidden');
+                cancelBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+                saveBtn.classList.remove('hidden');
+            } else {
+                prevBtn.classList.remove('hidden');
+                cancelBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+                saveBtn.classList.add('hidden');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Simple mock for "Save" interaction
+        document.getElementById('save-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const btn = e.currentTarget;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Saving...';
+            setTimeout(() => {
+                btn.innerHTML = 'Success! <span class="material-symbols-outlined">done_all</span>';
+                btn.classList.replace('bg-primary', 'bg-secondary');
+                setTimeout(() => history.back(), 1000);
+            }, 1500);
+        });
+    </script>
+</body></html>
