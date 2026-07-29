@@ -903,56 +903,63 @@ function TreePageInner() {
   return (
     <div className="flex flex-col min-h-screen bg-background pb-20 md:pb-6">
       {/* Top Header */}
-      <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2.5 flex flex-col gap-2.5 shadow-xs">
-        <div className="flex items-center justify-between gap-1.5 w-full">
-          <div className="flex items-center gap-1.5 min-w-0 shrink">
-            <button onClick={() => router.back()} className="p-1.5 rounded-xl hover:bg-muted text-muted-foreground shrink-0">
+      <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-border/40 px-3 py-2 flex flex-col gap-2 shadow-xs">
+        <div className="flex items-center justify-between gap-2 w-full">
+          {/* Left: Back & Family Selector */}
+          <div className="flex items-center gap-1.5 min-w-0 flex-1">
+            <button
+              onClick={() => router.back()}
+              className="p-2 rounded-xl hover:bg-muted text-muted-foreground shrink-0 active:scale-95 transition-transform"
+              aria-label="Go Back"
+            >
               <ArrowLeft className="h-5 w-5" />
             </button>
 
             {/* Family Select */}
             {families && families.length > 0 && (
-              <div className="relative min-w-0">
+              <div className="relative flex-1 max-w-[160px] xs:max-w-[200px] sm:max-w-[260px]">
                 <select
                   value={resolvedFamilyId}
                   onChange={(e) => {
                     setSelectedFamilyId(e.target.value);
                     setSelectedMember(undefined);
                   }}
-                  className="appearance-none h-8.5 pl-2.5 pr-7 rounded-xl border border-border/50 bg-card text-xs sm:text-sm font-extrabold text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer max-w-[130px] sm:max-w-[200px] truncate"
+                  className="appearance-none w-full h-9 pl-3 pr-7 rounded-xl border border-border/60 bg-card text-xs sm:text-sm font-extrabold text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer truncate shadow-2xs"
                 >
                   {families.map((f) => (
                     <option key={f.id} value={f.id}>{f.name}</option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-2 top-2.5 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
+                <ChevronDown className="absolute right-2 top-3 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
               </div>
             )}
           </div>
 
+          {/* Right: Controls (Export PDF, View Mode, Theme Switch) */}
           <div className="flex items-center gap-1.5 shrink-0">
             {/* Export PDF Button */}
             <button
               onClick={handleExportPDF}
               disabled={isExporting || !members || members.length === 0}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-extrabold bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-all cursor-pointer shadow-xs active:scale-95"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 transition-all cursor-pointer shadow-xs active:scale-95 shrink-0"
               title="Export Family Tree to PDF"
             >
-              {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
-              <span className="hidden sm:inline">Export PDF</span>
+              {isExporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              <span className="text-[11px] sm:text-xs font-extrabold">PDF</span>
             </button>
 
             {/* View Mode Switcher */}
-            <div className="flex items-center p-0.5 rounded-xl bg-muted/70 border border-border/40">
+            <div className="flex items-center p-0.5 rounded-xl bg-muted/80 border border-border/50 shrink-0">
               <button
                 onClick={() => setViewMode("cards")}
                 className={cn(
                   "flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer",
                   viewMode === "cards" ? "bg-card text-primary shadow-xs" : "text-muted-foreground hover:text-foreground"
                 )}
+                title="Cards View"
               >
-                <Layers className="h-3 w-3" />
-                Cards
+                <Layers className="h-3.5 w-3.5" />
+                <span className="hidden xs:inline">Cards</span>
               </button>
               <button
                 onClick={() => setViewMode("canvas")}
@@ -960,11 +967,13 @@ function TreePageInner() {
                   "flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer",
                   viewMode === "canvas" ? "bg-card text-primary shadow-xs" : "text-muted-foreground hover:text-foreground"
                 )}
+                title="Canvas View"
               >
-                <LayoutGrid className="h-3 w-3" />
-                Canvas
+                <LayoutGrid className="h-3.5 w-3.5" />
+                <span className="hidden xs:inline">Canvas</span>
               </button>
             </div>
+
             <ThemeSwitch />
           </div>
         </div>
