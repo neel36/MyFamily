@@ -31,7 +31,7 @@ export function BottomNavigation() {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/80 backdrop-blur-lg border-t border-border/40 py-2.5 px-6 flex items-center justify-around md:hidden shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-xl border-t border-border/50 px-2 py-1.5 pb-[calc(0.5rem+env(safe-area-inset-bottom))] flex items-center justify-around md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)] overflow-x-auto no-scrollbar">
       {items.map((item) => {
         const isActive = pathname === item.href;
         const Icon = item.icon;
@@ -40,25 +40,25 @@ export function BottomNavigation() {
           <button
             key={item.href}
             onClick={() => router.push(item.href)}
-            className="relative flex flex-col items-center justify-center gap-1 py-1 px-3 text-muted-foreground transition-colors active:scale-95 cursor-pointer"
+            className="relative flex flex-col items-center justify-center gap-0.5 py-1 px-2 min-w-[52px] text-muted-foreground transition-all active:scale-95 cursor-pointer shrink-0"
           >
             {isActive && (
               <motion.span
                 layoutId="activeNavTab"
-                className="absolute inset-0 bg-primary/10 rounded-2xl -z-10"
+                className="absolute inset-0 bg-primary/12 rounded-xl -z-10"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
             <Icon
               className={cn(
-                "h-5 w-5 transition-transform",
-                isActive ? "text-primary scale-110" : "text-muted-foreground/80 hover:text-foreground"
+                "h-5 w-5 transition-all duration-200",
+                isActive ? "text-primary scale-110 stroke-[2.5]" : "text-muted-foreground/80 hover:text-foreground"
               )}
             />
             <span
               className={cn(
-                "text-[10px] font-bold tracking-wide transition-colors",
-                isActive ? "text-primary" : "text-muted-foreground/80"
+                "text-[10px] font-bold tracking-tight transition-colors whitespace-nowrap",
+                isActive ? "text-primary font-extrabold" : "text-muted-foreground/80"
               )}
             >
               {item.label}
@@ -66,7 +66,7 @@ export function BottomNavigation() {
           </button>
         );
       })}
-    </div>
+    </nav>
   );
 }
 
