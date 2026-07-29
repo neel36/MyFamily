@@ -6,6 +6,7 @@ import { AppConfigProvider } from "@/components/app-config-provider";
 import { AdManager } from "@/components/ads/ad-manager";
 import { InstallButton } from "@/components/pwa/install-button";
 import { AnnouncementBanner, MaintenanceModeGuard } from "@/components/layout/system-banner";
+import { NativeAppBridge } from "@/components/layout/native-app-bridge";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -52,6 +53,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
+          <NativeAppBridge />
           <AppConfigProvider>
             <AnnouncementBanner />
             <MaintenanceModeGuard>

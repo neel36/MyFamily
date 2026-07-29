@@ -154,3 +154,21 @@ body {
   font-size: clamp(0.875rem, 1vw + 0.75rem, 1.125rem);
   line-height: 1.6;
 }
+
+/* Native Android App Touch & Layout Polish */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+input, textarea, select, [contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+body {
+  overscroll-behavior-y: contain;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
