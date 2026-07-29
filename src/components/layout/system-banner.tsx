@@ -62,10 +62,6 @@ export function MaintenanceModeGuard({ children }: { children: React.ReactNode }
             <p className="mt-0.5">Application data remains safely stored in your browser&apos;s IndexedDB.</p>
           </div>
 
-          <Button variant="outline" className="w-full justify-center gap-2" onClick={() => router.push("/admin")}>
-            <ShieldCheck className="h-4 w-4 text-amber-500" />
-            Access Admin Panel
-          </Button>
         </Card>
       </div>
     );

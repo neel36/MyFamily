@@ -246,29 +246,6 @@ export default function SettingsPage() {
           </Card>
         </section>
 
-        {/* ADMIN PANEL LINK */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2 text-violet-600 dark:text-violet-400">
-            <ShieldCheck className="h-5 w-5" />
-            <h2 className="text-lg font-bold">Admin Controls</h2>
-          </div>
-
-          <Card className="shadow-md space-y-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h3 className="font-bold text-foreground">Local Admin Panel (/admin)</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Manage app name, branding colors, announcement banner, maintenance mode, and offline configs.
-                </p>
-              </div>
-              <Button variant="primary" onClick={() => router.push("/admin")} className="gap-2 shrink-0">
-                <ShieldCheck className="h-4 w-4" />
-                Open Admin Panel
-              </Button>
-            </div>
-          </Card>
-        </section>
-
         {/* BACKUP & RESTORE SYSTEM */}
         <BackupManager />
 

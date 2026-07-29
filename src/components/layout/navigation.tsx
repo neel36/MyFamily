@@ -26,7 +26,6 @@ export function BottomNavigation() {
     { label: "Tree", href: "/tree", icon: GitFork },
     { label: "Members", href: "/members", icon: Users },
     { label: "Backup", href: "/backup", icon: DatabaseZap },
-    { label: "Admin", href: "/admin", icon: ShieldCheck },
     { label: "Settings", href: "/settings", icon: Settings },
   ];
 
