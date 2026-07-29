@@ -403,15 +403,17 @@ function SpouseConnector({ x1, x2, y, themeColor }: { x1: number; x2: number; y:
 }
 
 // ======================================
-// MOBILE HIERARCHY CARDS VIEW
+// MOBILE LADDER TREE VIEW (Top-Down Animated Ladder Structure)
 // ======================================
 function MobileTreeNodeCard({
   node,
   depth = 0,
+  isLast = false,
   onMemberClick,
 }: {
   node: TreeNode;
   depth?: number;
+  isLast?: boolean;
   onMemberClick: (m: Member) => void;
 }) {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -421,68 +423,122 @@ function MobileTreeNodeCard({
   const age = getAgeText(m);
 
   return (
-    <div className="flex flex-col gap-2 relative">
-      {/* Node Card */}
-      <div
-        className={cn(
-          "flex flex-col gap-2 p-3.5 rounded-2xl border transition-all shadow-sm bg-card/90 backdrop-blur-md",
-          m.gender === "male" ? "border-blue-500/30" : m.gender === "female" ? "border-pink-500/30" : "border-emerald-500/30"
-        )}
-      >
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 cursor-pointer flex-1 min-w-0" onClick={() => onMemberClick(m)}>
-            <Avatar src={m.photo} alt={m.name} className="h-11 w-11 shrink-0 ring-2 ring-border/50" />
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <h4 className="text-sm font-bold text-foreground truncate">{m.name}</h4>
-                <span className="text-xs">{gender.symbol}</span>
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className="relative flex flex-col gap-3"
+    >
+      {/* Ladder Step Node Card */}
+      <div className="relative flex items-start gap-3">
+        {/* Left Vertical Ladder Rung Marker */}
+        <div className="flex flex-col items-center shrink-0 self-stretch">
+          <div
+            className={cn(
+              "w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-md border-2 z-10 transition-transform active:scale-110",
+              m.gender === "male"
+                ? "bg-blue-500 text-white border-blue-300 shadow-blue-500/30"
+                : m.gender === "female"
+                ? "bg-pink-500 text-white border-pink-300 shadow-pink-500/30"
+                : "bg-emerald-500 text-white border-emerald-300 shadow-emerald-500/30"
+            )}
+          >
+            {gender.symbol}
+          </div>
+          {/* Vertical Ladder Spine Line down to children */}
+          {node.children.length > 0 && isOpen && (
+            <div className="w-1 flex-1 bg-gradient-to-b from-primary/60 via-primary/30 to-primary/10 rounded-full my-1" />
+          )}
+        </div>
+
+        {/* Card Body */}
+        <div
+          className={cn(
+            "flex-1 flex flex-col gap-2 p-4 rounded-3xl border shadow-sm transition-all bg-card/95 backdrop-blur-xl hover:shadow-md",
+            m.gender === "male"
+              ? "border-blue-500/30 hover:border-blue-500/60"
+              : m.gender === "female"
+              ? "border-pink-500/30 hover:border-pink-500/60"
+              : "border-emerald-500/30 hover:border-emerald-500/60"
+          )}
+        >
+          {/* Member Main Row */}
+          <div className="flex items-center justify-between gap-3">
+            <div
+              className="flex items-center gap-3 cursor-pointer flex-1 min-w-0 active:opacity-80 transition-opacity"
+              onClick={() => onMemberClick(m)}
+            >
+              <Avatar src={m.photo} alt={m.name} className="h-12 w-12 shrink-0 ring-2 ring-primary/20 shadow-xs" />
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <h4 className="text-sm font-extrabold text-foreground truncate tracking-tight">{m.name}</h4>
+                </div>
+                <p className="text-[11px] font-semibold text-muted-foreground mt-0.5">
+                  {m.alive ? (age ? `Age ${age}` : "Alive") : "Deceased"}
+                  {m.occupation && ` · ${m.occupation}`}
+                </p>
               </div>
-              <p className="text-[11px] font-medium text-muted-foreground">
-                {m.alive ? (age ? `${age}` : "Alive") : "Deceased"}
-                {m.occupation && ` · ${m.occupation}`}
-              </p>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <Badge variant={m.alive ? "success" : "danger"} className="text-[10px] py-0.5 px-2.5 rounded-full font-bold">
+                {m.alive ? "Alive" : "Deceased"}
+              </Badge>
+
+              {node.children.length > 0 && (
+                <button
+                  onClick={() => setIsOpen((v) => !v)}
+                  className="p-2 rounded-2xl bg-muted/70 hover:bg-muted text-muted-foreground cursor-pointer transition-transform active:scale-95"
+                  aria-label="Toggle Branch"
+                >
+                  <ChevronRight className={cn("h-4 w-4 transition-transform duration-200", isOpen && "rotate-90")} />
+                </button>
+              )}
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 shrink-0">
-            <Badge variant={m.alive ? "success" : "danger"} className="text-[10px] py-0 px-2">
-              {m.alive ? "Alive" : "Deceased"}
-            </Badge>
-
-            {node.children.length > 0 && (
-              <button
-                onClick={() => setIsOpen((v) => !v)}
-                className="p-1.5 rounded-xl bg-muted/60 hover:bg-muted text-muted-foreground cursor-pointer transition-transform"
-              >
-                <ChevronRight className={cn("h-4 w-4 transition-transform duration-200", isOpen && "rotate-90")} />
-              </button>
-            )}
-          </div>
+          {/* Spouse Spouse Link Rung */}
+          {spouse && (
+            <div
+              className="flex items-center gap-2.5 pt-2.5 mt-1 border-t border-border/40 cursor-pointer active:opacity-80 transition-opacity"
+              onClick={() => onMemberClick(spouse)}
+            >
+              <div className="w-6 h-6 rounded-full bg-rose-500/15 flex items-center justify-center shrink-0">
+                <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500/40" />
+              </div>
+              <Avatar src={spouse.photo} alt={spouse.name} className="h-8 w-8 shrink-0 ring-1 ring-border/50" />
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-foreground truncate block">{spouse.name}</span>
+                <span className="text-[10px] font-semibold text-muted-foreground">Spouse</span>
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* Spouse row if present */}
-        {spouse && (
-          <div
-            className="flex items-center gap-2 pt-2 mt-1 border-t border-border/40 cursor-pointer"
-            onClick={() => onMemberClick(spouse)}
-          >
-            <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500/20 shrink-0" />
-            <Avatar src={spouse.photo} alt={spouse.name} className="h-7 w-7 shrink-0" />
-            <span className="text-xs font-semibold text-foreground truncate">{spouse.name}</span>
-            <span className="text-[10px] text-muted-foreground ml-auto">Spouse</span>
-          </div>
-        )}
       </div>
 
-      {/* Children list */}
-      {node.children.length > 0 && isOpen && (
-        <div className="pl-4 sm:pl-6 border-l-2 border-primary/20 flex flex-col gap-3.5 mt-1 ml-4">
-          {node.children.map((child) => (
-            <MobileTreeNodeCard key={child.member.id} node={child} depth={depth + 1} onMemberClick={onMemberClick} />
-          ))}
-        </div>
-      )}
-    </div>
+      {/* Children Ladder Branch Level */}
+      <AnimatePresence>
+        {node.children.length > 0 && isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pl-4 sm:pl-7 flex flex-col gap-3 ml-3 border-l-2 border-dashed border-primary/30"
+          >
+            {node.children.map((child, idx) => (
+              <MobileTreeNodeCard
+                key={child.member.id}
+                node={child}
+                depth={depth + 1}
+                isLast={idx === node.children.length - 1}
+                onMemberClick={onMemberClick}
+              />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -848,7 +904,7 @@ function TreePageInner() {
             <svg
               width="100%"
               height="100%"
-              style={{ cursor: isPanning ? "grabbing" : "grab", userSelect: "none" }}
+              style={{ cursor: isPanning ? "grabbing" : "grab", userSelect: "none", touchAction: "none" }}
               onMouseDown={(e) => {
                 if ((e.target as HTMLElement).closest?.('[data-node="true"]')) return;
                 setIsPanning(true);
@@ -857,6 +913,30 @@ function TreePageInner() {
               onMouseMove={(e) => isPanning && setPan({ x: e.clientX - panStart.x, y: e.clientY - panStart.y })}
               onMouseUp={() => setIsPanning(false)}
               onMouseLeave={() => setIsPanning(false)}
+              onTouchStart={(e) => {
+                if (e.touches.length === 2) {
+                  const [t1, t2] = Array.from(e.touches);
+                  (window as any)._pinchDist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                } else if (e.touches.length === 1) {
+                  setIsPanning(true);
+                  setPanStart({ x: e.touches[0].clientX - pan.x, y: e.touches[0].clientY - pan.y });
+                }
+              }}
+              onTouchMove={(e) => {
+                if (e.touches.length === 2 && (window as any)._pinchDist) {
+                  const [t1, t2] = Array.from(e.touches);
+                  const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                  const ratio = dist / (window as any)._pinchDist;
+                  (window as any)._pinchDist = dist;
+                  setZoom((z) => Math.min(2.5, Math.max(0.3, z * ratio)));
+                } else if (e.touches.length === 1 && isPanning) {
+                  setPan({ x: e.touches[0].clientX - panStart.x, y: e.touches[0].clientY - panStart.y });
+                }
+              }}
+              onTouchEnd={() => {
+                setIsPanning(false);
+                delete (window as any)._pinchDist;
+              }}
               onWheel={(e) => {
                 e.preventDefault();
                 setZoom((z) => Math.min(2.5, Math.max(0.3, z + (e.deltaY > 0 ? -0.1 : 0.1))));
